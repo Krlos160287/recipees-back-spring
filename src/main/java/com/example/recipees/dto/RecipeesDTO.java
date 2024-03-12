@@ -9,6 +9,8 @@ public class RecipeesDTO {
     private List<Products> products;
     private String steps;
 
+    private String createdBy;
+
     public String getNombre() {
         return nombre;
     }
@@ -31,5 +33,13 @@ public class RecipeesDTO {
 
     public void setSteps(String steps) {
         this.steps = steps;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }
