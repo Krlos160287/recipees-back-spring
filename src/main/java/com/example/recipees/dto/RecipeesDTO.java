@@ -5,6 +5,7 @@ import com.example.recipees.models.Products;
 import java.util.List;
 
 public class RecipeesDTO {
+    private String id;
     private String nombre;
     private List<Products> products;
     private String steps;
@@ -41,5 +42,13 @@ public class RecipeesDTO {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
