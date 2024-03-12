@@ -12,6 +12,8 @@ public class Recipees {
 
     private String steps;
 
+    private String createdBy;
+
     public String getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class Recipees {
 
     public void setSteps(String steps) {
         this.steps = steps;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

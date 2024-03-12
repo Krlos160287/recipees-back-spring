@@ -1,7 +1,6 @@
 package com.example.recipees.repository;
 
 import com.example.recipees.models.Categories;
-import com.example.recipees.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
