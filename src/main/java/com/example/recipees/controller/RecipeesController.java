@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/recipees")
 public class RecipeesController {
@@ -26,6 +28,11 @@ public class RecipeesController {
         newRecipee.setCreatedBy(username);
 
         return recipeesService.createRecipee(newRecipee);
+    }
+
+    @GetMapping(value = "/{mailUser}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<RecipeesDTO> getRecipeesByUser(@PathVariable("mailUser") String usermail) {
+        return recipeesService.getRecipeesByUser(usermail);
     }
 
     private String extractTokenFromHeader(String authorizationHeader) {

@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class RecipeesServiceImpl implements RecipeesService {
     @Autowired
@@ -25,5 +28,20 @@ public class RecipeesServiceImpl implements RecipeesService {
         BeanUtils.copyProperties(savedRecipee, createdRecipeeDTO);
 
         return createdRecipeeDTO;
+    }
+
+    @Override
+    public List<RecipeesDTO> getRecipeesByUser(String usermail) {
+        List<RecipeesDTO> recipeesDTO = new ArrayList<>();
+        List<Recipees> recipees = recipeesRepository.findByCreatedBy(usermail);
+
+        for (Recipees recipe : recipees) {
+            RecipeesDTO recipeesDto = new RecipeesDTO();
+            BeanUtils.copyProperties(recipe, recipeesDto);
+            recipeesDto.setId(recipe.getId());
+            recipeesDTO.add(recipeesDto);
+        }
+
+        return recipeesDTO;
     }
 }
