@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeesServiceImpl implements RecipeesService {
@@ -43,5 +44,25 @@ public class RecipeesServiceImpl implements RecipeesService {
         }
 
         return recipeesDTO;
+    }
+
+    @Override
+    public RecipeesDTO editRecipee(RecipeesDTO editRecipee) {
+        Optional<Recipees> optionalRecipe = recipeesRepository.findById(editRecipee.getId());
+        if (optionalRecipe.isEmpty()) {
+            return null;
+        }
+        Recipees existingRecipe = optionalRecipe.get();
+
+        existingRecipe.setNombre(editRecipee.getNombre());
+        existingRecipe.setProducts(editRecipee.getProducts());
+        existingRecipe.setSteps(editRecipee.getSteps());
+        existingRecipe.setCreatedBy(editRecipee.getCreatedBy());
+
+        Recipees savedRecipe = recipeesRepository.save(existingRecipe);
+
+        RecipeesDTO updatedRecipeDTO = new RecipeesDTO();
+        BeanUtils.copyProperties(savedRecipe, updatedRecipeDTO);
+        return updatedRecipeDTO;
     }
 }

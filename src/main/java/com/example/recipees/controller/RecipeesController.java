@@ -35,6 +35,13 @@ public class RecipeesController {
         return recipeesService.getRecipeesByUser(usermail);
     }
 
+    @PutMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public RecipeesDTO recipee (
+            @RequestBody RecipeesDTO editRecipee)
+            throws Exception {
+        return recipeesService.editRecipee(editRecipee);
+    }
+
     private String extractTokenFromHeader(String authorizationHeader) {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             return authorizationHeader.substring(7);
