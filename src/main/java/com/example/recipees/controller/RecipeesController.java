@@ -66,28 +66,36 @@ public class RecipeesController {
             document.addPage(page);
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 14);
+                contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 14);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(100, 700);
+
+                // Recipe Name
                 contentStream.showText("Recipe Name: " + recipeesDTO.getNombre());
                 contentStream.newLineAtOffset(0, -15);
-                contentStream.newLineAtOffset(0, -15);
+
+                // Ingredients Title
                 contentStream.showText("Ingredientes:");
                 contentStream.newLineAtOffset(0, -15);
 
+                // Ingredients List
                 List<Products> ingredients = recipeesDTO.getProducts();
                 for (Products ingredient : ingredients) {
-                    contentStream.newLineAtOffset(0, -15);
-                    contentStream.showText("- " + ingredient.getNombre()+": " + ingredient.getCantidad() +
-                            ingredient.getUnidadMedida());
+                    contentStream.showText("- " + ingredient.getNombre() + ": " + ingredient.getCantidad() + " " + ingredient.getUnidadMedida());
                     contentStream.newLineAtOffset(0, -15);
                 }
 
+                // Recipe Steps Title
                 contentStream.newLineAtOffset(0, -15);
-                contentStream.showText("Pasos Receta: ");
+                contentStream.showText("Pasos Receta:");
                 contentStream.newLineAtOffset(0, -15);
-                contentStream.newLineAtOffset(0, -15);
-                contentStream.showText((recipeesDTO.getSteps()));
+
+                // Recipe Steps
+                String[] steps = recipeesDTO.getSteps().split("\n"); // Split steps by line breaks
+                for (String step : steps) {
+                    contentStream.showText(step);
+                    contentStream.newLineAtOffset(0, -15); // Move to the next line
+                }
 
                 contentStream.endText();
             }
@@ -98,6 +106,7 @@ public class RecipeesController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private String extractTokenFromHeader(String authorizationHeader) {
