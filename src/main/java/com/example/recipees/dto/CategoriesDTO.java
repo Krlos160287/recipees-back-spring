@@ -4,6 +4,7 @@ import com.example.recipees.models.Ingredients;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class CategoriesDTO {
 
     private String categoria;

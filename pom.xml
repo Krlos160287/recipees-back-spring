@@ -14,7 +14,7 @@
 	<name>recipees</name>
 	<description>Recipees back project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>17</java.version><itext.version>$release-core-7-variable</itext.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,6 +57,11 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.1</version>
 		</dependency>
 	</dependencies>
 

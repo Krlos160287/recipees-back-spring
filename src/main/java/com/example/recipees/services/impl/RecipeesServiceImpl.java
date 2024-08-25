@@ -65,4 +65,32 @@ public class RecipeesServiceImpl implements RecipeesService {
         BeanUtils.copyProperties(savedRecipe, updatedRecipeDTO);
         return updatedRecipeDTO;
     }
+
+    @Override
+    public RecipeesDTO deleteRecipee(String recipeeId) {
+        if (!recipeesRepository.existsById(recipeeId)) {
+            return null;
+        }
+
+        recipeesRepository.deleteById(recipeeId);
+
+        return new RecipeesDTO();
+    }
+
+    @Override
+    public RecipeesDTO getRecipeeById(String recipeeId) {
+        if (!recipeesRepository.existsById(recipeeId)) {
+            return null;
+        }
+
+        Recipees recipee = recipeesRepository.findById(recipeeId).orElse(null);
+
+        RecipeesDTO response = new RecipeesDTO();
+
+        assert recipee != null;
+        BeanUtils.copyProperties(recipee, response);
+
+        return response;
+
+    }
 }
