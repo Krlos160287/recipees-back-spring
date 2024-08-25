@@ -9,4 +9,6 @@ public interface RecipeesService {
     public RecipeesDTO createRecipee(RecipeesDTO newRecipee) throws ParseException;
     public List<RecipeesDTO> getRecipeesByUser(String usermail);
     public RecipeesDTO editRecipee(RecipeesDTO editRecipee) throws ParseException;
+    public RecipeesDTO deleteRecipee(String recipeeId);
+    public RecipeesDTO getRecipeeById(String recipeeId);
 }
