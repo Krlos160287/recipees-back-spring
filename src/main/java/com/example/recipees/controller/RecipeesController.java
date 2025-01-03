@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -51,10 +52,18 @@ public class RecipeesController {
     }
 
     @DeleteMapping(value={"/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public RecipeesDTO recipee(
+    public ResponseEntity<List<RecipeesDTO>> deleteRecipee(
             @PathVariable("id") String recipeeId) {
-        return recipeesService.deleteRecipee(recipeeId);
+
+        List<RecipeesDTO> updatedRecipees = recipeesService.deleteRecipee(recipeeId);
+
+        if (updatedRecipees == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(updatedRecipees);
     }
+
 
     @GetMapping(value = "/pdf/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
     public void generatePDF(@PathVariable("id") String recipeeId, HttpServletResponse response) {

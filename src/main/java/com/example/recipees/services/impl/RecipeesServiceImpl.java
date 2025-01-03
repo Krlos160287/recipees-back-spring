@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RecipeesServiceImpl implements RecipeesService {
@@ -67,14 +68,23 @@ public class RecipeesServiceImpl implements RecipeesService {
     }
 
     @Override
-    public RecipeesDTO deleteRecipee(String recipeeId) {
+    public List<RecipeesDTO> deleteRecipee(String recipeeId) {
         if (!recipeesRepository.existsById(recipeeId)) {
             return null;
         }
 
         recipeesRepository.deleteById(recipeeId);
 
-        return new RecipeesDTO();
+        List<Recipees> recipees = recipeesRepository.findAll();
+        List<RecipeesDTO> updatedRecipees = new ArrayList<>();
+        for (Recipees recipe : recipees) {
+            RecipeesDTO recipeesDto = new RecipeesDTO();
+            BeanUtils.copyProperties(recipe, recipeesDto);
+            recipeesDto.setId(recipe.getId());
+            updatedRecipees.add(recipeesDto);
+        }
+
+        return updatedRecipees;
     }
 
     @Override
