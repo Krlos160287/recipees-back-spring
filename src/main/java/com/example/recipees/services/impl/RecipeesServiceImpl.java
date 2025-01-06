@@ -56,7 +56,6 @@ public class RecipeesServiceImpl implements RecipeesService {
         Recipees existingRecipe = optionalRecipe.get();
 
         existingRecipe.setNombre(editRecipee.getNombre());
-        existingRecipe.setProducts(editRecipee.getProducts());
         existingRecipe.setSteps(editRecipee.getSteps());
         existingRecipe.setCreatedBy(editRecipee.getCreatedBy());
 

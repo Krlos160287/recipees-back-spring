@@ -2,7 +2,6 @@ package com.example.recipees.controller;
 
 import com.example.recipees.dto.RecipeesDTO;
 import com.example.recipees.jwt.JwtTokenService;
-import com.example.recipees.models.Products;
 import com.example.recipees.services.RecipeesService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -86,13 +85,6 @@ public class RecipeesController {
                 // Ingredients Title
                 contentStream.showText("Ingredientes:");
                 contentStream.newLineAtOffset(0, -15);
-
-                // Ingredients List
-                List<Products> ingredients = recipeesDTO.getProducts();
-                for (Products ingredient : ingredients) {
-                    contentStream.showText("- " + ingredient.getNombre() + ": " + ingredient.getCantidad() + " " + ingredient.getUnidadMedida());
-                    contentStream.newLineAtOffset(0, -15);
-                }
 
                 // Recipe Steps Title
                 contentStream.newLineAtOffset(0, -15);
